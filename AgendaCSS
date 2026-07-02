@@ -1,0 +1,178 @@
+const form = document.querySelector('form')
+const nome = document.querySelector('#nome')
+const email = document.querySelector('#email')
+const numero = document.querySelector('#numero')
+
+let exibicaoContatos = document.querySelector('.box3')
+
+let listaContatos = []
+
+let indiceEditar = null
+
+let buttonCadastrar = document.querySelector('.buttonCadastrar')
+
+let inputBuscar = document.querySelector('#buscar')
+
+let mensagem = document.querySelector('#mensagem')
+
+form.addEventListener('submit', adicionarContato)
+
+exibicaoContatos.addEventListener('click', excluir)
+exibicaoContatos.addEventListener('click', editar)
+
+inputBuscar.addEventListener('input', buscar)
+inputBuscar.addEventListener('blur', listar)
+
+function buscar(e) {
+    exibicaoContatos.innerHTML = ''
+    listaContatos.forEach((contato, indice) => {
+        if(contato.nome.toLowerCase().includes(inputBuscar.value.toLowerCase())){
+            const p1 = document.createElement('p')
+            criarLinha(contato, indice, p1)
+            p1.className = 'contato'
+            exibicaoContatos.appendChild(p1)
+        }
+    });
+}
+
+function excluir(e) {
+    if(e.target.textContent == 'Excluir'){
+        listaContatos.splice(e.target.value, 1)
+        listar()
+    }
+}
+
+function editar(e) {
+    if(e.target.textContent == 'Editar'){
+        indiceEditar = e.target.value
+        nome.value = listaContatos[indiceEditar].nome
+        email.value = listaContatos[indiceEditar].email
+        numero.value = listaContatos[indiceEditar].numero
+        buttonCadastrar.textContent = 'Editar'
+    }
+}
+
+function adicionarContato(e) {
+    e.preventDefault()
+    if(nome.value.trim() == '' || email.value == '' || numero.value.trim() == ''){
+        mensagem.textContent = 'Preencha todos os campos!'
+        mensagem.className = 'erro'
+        return
+    }
+    if(nome.value.length < 3){
+        mensagem.textContent = 'O nome deve conter no mínimo 3 caracteres!'
+        mensagem.className = 'erro'
+        return
+    }
+
+    if(isNaN(numero.value.trim())){
+        mensagem.textContent = 'O número deve conter apenas números!'
+        mensagem.className = 'erro'
+        return
+    }
+
+    let duplicado = false
+
+    listaContatos.forEach((contato, indice) => {
+        if(indice != indiceEditar){
+            if(contato.email == email.value){
+                mensagem.className = 'erro'
+                mensagem.textContent = 'Email já existente!'
+                duplicado = true
+            }
+            if(contato.numero == numero.value){
+                mensagem.className = 'erro'
+                mensagem.textContent = 'Número já existente!'
+                duplicado = true
+            }
+        }
+    });
+
+    if(duplicado){
+        return
+    }
+
+    if(indiceEditar !== null){
+        listaContatos[indiceEditar].nome = nome.value
+        listaContatos[indiceEditar].email = email.value
+        listaContatos[indiceEditar].numero = numero.value
+        buttonCadastrar.textContent = 'Cadastrar'
+        indiceEditar = null
+    }else{
+        listaContatos.push({nome: nome.value, email: email.value, numero: numero.value,})
+    }
+    mensagem.textContent = 'Cadastro realizado!'
+    mensagem.className = 'certo'
+    listar()
+    zerar()
+}
+
+function zerar() {
+    nome.value = ''
+    email.value = ''
+    numero.value = ''
+}
+
+function listar() {
+    if(inputBuscar.value != ''){
+        inputBuscar.value = ''
+    }
+    exibicaoContatos.innerHTML = ''
+    listaContatos.forEach((contato, indice) => {
+        const p1 = document.createElement('p')
+        criarLinha(contato, indice, p1)
+        p1.className = 'contato'
+        exibicaoContatos.appendChild(p1)
+    });
+}
+
+function criarLinha(contato, indice, p1) {
+    const div1 = document.createElement('div')
+    const div2 = document.createElement('div')
+    criarDiv1(contato, div1)
+    criarDiv2(indice, div2)
+    p1.appendChild(div1)
+    p1.appendChild(div2)
+}
+
+function criarDiv1(contato, div1) {
+    const h2 = document.createElement('h2')
+    criarH2(h2, contato)
+    const p2 = document.createElement('p')
+    criarP2(p2, contato)
+    div1.appendChild(h2)
+    div1.appendChild(p2)
+    div1.className = 'informacoes'
+}
+
+function criarH2(h2, contato){
+    h2.textContent = contato.nome
+    h2.className = 'nome'
+}
+
+function criarP2(p2, contato){
+    p2.textContent = `${contato.email} / ${contato.numero}`
+    p2.className = 'emailNumero'
+}
+
+function criarDiv2(indice, div2) {
+    const buttonExcluir = document.createElement('button')
+    criarButtonExcluir(buttonExcluir, indice)
+    const buttonEditar = document.createElement('button')
+    criarButtonEditar(buttonEditar, indice)
+    div2.appendChild(buttonExcluir)
+    div2.appendChild(buttonEditar)
+    div2.className = 'butoes'
+}
+
+function criarButtonExcluir(buttonExcluir, indice) {
+    buttonExcluir.textContent = 'Excluir'
+    buttonExcluir.className = 'buttonExcluir'
+    buttonExcluir.value = indice
+}
+
+function criarButtonEditar(buttonEditar, indice) {
+    buttonEditar.textContent = 'Editar'
+    buttonEditar.className = 'buttonEditar'
+    buttonEditar.value = indice
+}
