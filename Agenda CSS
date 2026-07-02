@@ -1,0 +1,132 @@
+body{
+    margin: 0;
+    height:100vh;
+}
+.cabecalho{
+    background-color: blueviolet;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.h1{
+    color: white;
+}
+h1{
+    color: blueviolet;
+}
+.container1{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 5%;
+}
+.box1,
+.box2{
+    min-height: 300px;
+}
+.box1{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    color: blueviolet;
+    margin-top: 2%;
+    padding-left: 1%;
+}
+input{
+    border: 2px solid blueviolet;
+    border-radius: 10px;
+    padding: 1%;
+    color: blueviolet
+}
+input:focus{
+    border-color: blueviolet;
+    outline: none;
+}
+input::placeholder{
+    color: blueviolet;
+}
+.erro{
+    color: red;
+}
+.certo{
+    color: green;
+}
+.buttonCadastrar{
+    color: white;
+    margin-top: 8%;
+    border-radius: 10px;
+    background-color: blueviolet;
+    padding: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 2px solid white;
+}
+.buttonCadastrar:hover{
+    border: 2px solid blueviolet;
+    background-color: white;
+    color: blueviolet;
+}
+.box2{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border-left: 4px solid blueviolet;
+    padding-left: 5%;
+    margin-right: 5%;
+}
+.contato{
+    background-color: blueviolet;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 3%;
+    height: 65px;
+}
+.informacoes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.nome{
+    margin: 0;
+    color: white;
+}
+.emailNumero{
+    margin: 0;
+    color: white;
+}
+.butoes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.buttonExcluir:hover{
+    color: white;
+    border: white solid 2px;
+    background-color: blueviolet;
+}
+.buttonExcluir{
+    color: blueviolet;
+    border: 2px solid blueviolet;
+    background-color: white;
+}
+.buttonEditar:hover{
+    color: white;
+    border: white solid 2px;
+    background-color: blueviolet;
+}
+.buttonEditar{
+    color: blueviolet;
+    border: 2px solid blueviolet;
+    background-color: white;
+}
