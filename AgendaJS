@@ -57,17 +57,29 @@ function adicionarContato(e) {
     if(nome.value.trim() == '' || email.value == '' || numero.value.trim() == ''){
         mensagem.textContent = 'Preencha todos os campos!'
         mensagem.className = 'erro'
+        setTimeout(() => {
+            mensagem.textContent = ''
+            mensagem.className = ''
+        }, 3000)
         return
     }
     if(nome.value.length < 3){
         mensagem.textContent = 'O nome deve conter no mínimo 3 caracteres!'
         mensagem.className = 'erro'
+        setTimeout(() => {
+            mensagem.textContent = ''
+            mensagem.className = ''
+        }, 3000)
         return
     }
 
     if(isNaN(numero.value.trim())){
         mensagem.textContent = 'O número deve conter apenas números!'
         mensagem.className = 'erro'
+        setTimeout(() => {
+            mensagem.textContent = ''
+            mensagem.className = ''
+        }, 3000)
         return
     }
 
@@ -78,11 +90,19 @@ function adicionarContato(e) {
             if(contato.email == email.value){
                 mensagem.className = 'erro'
                 mensagem.textContent = 'Email já existente!'
+                setTimeout(() => {
+                    mensagem.textContent = ''
+                    mensagem.className = ''
+                }, 3000)
                 duplicado = true
             }
             if(contato.numero == numero.value){
                 mensagem.className = 'erro'
                 mensagem.textContent = 'Número já existente!'
+                setTimeout(() => {
+                    mensagem.textContent = ''
+                    mensagem.className = ''
+                }, 3000)
                 duplicado = true
             }
         }
@@ -101,6 +121,11 @@ function adicionarContato(e) {
     }else{
         listaContatos.push({nome: nome.value, email: email.value, numero: numero.value,})
     }
+    
+    setTimeout(() => {
+        mensagem.textContent = ''
+        mensagem.className = ''
+    }, 3000)
     mensagem.textContent = 'Cadastro realizado!'
     mensagem.className = 'certo'
     listar()
