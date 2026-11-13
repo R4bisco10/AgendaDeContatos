@@ -13,7 +13,7 @@ let inputBuscar = document.querySelector('#buscar')
 
 let mensagem = document.querySelector('#mensagem')
 
-const base_url = "https://6a994eef53c0481726b91e08.mockapi.io"
+const base_url = "http://localhost:3000"
 
 form.addEventListener('submit', adicionarContato)
 
